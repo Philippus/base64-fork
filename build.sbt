@@ -1,4 +1,4 @@
-organization := "me.lessis"
+organization := "nl.gn0s1s"
 
 name := "base64"
 
@@ -11,7 +11,7 @@ homepage := Some(url(s"https://github.com/softprops/${name.value}/#readme"))
 
 scalacOptions += Opts.compile.deprecation
 
-crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.8")
+crossScalaVersions := Seq("2.10.7", "2.11.12", "2.13.0-M5", "2.12.8")
 
 scalaVersion := crossScalaVersions.value.last
 
@@ -20,7 +20,8 @@ libraryDependencies ++= Seq(
   "commons-codec" % "commons-codec" % "1.12" % Test,
   "io.netty" % "netty-codec" % "4.1.33.Final" % Test)
 
-bintrayPackageLabels in bintray := Seq("base64", "encoding", "rfc4648")
+bintrayOrganization := Some("gn0s1s")
+bintrayRepository := "releases"
 
 lsSettings
 

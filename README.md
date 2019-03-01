@@ -11,9 +11,7 @@ This is a library for base64 encoding and decoding raw data.
 Via the copy and paste method
 
 ```scala
-resolvers += "softprops-maven" at "http://dl.bintray.com/content/softprops/maven"
-
-libraryDependencies += "me.lessis" %% "base64" % "0.2.0"
+libraryDependencies += "nl.gn0s1s" %% "base64" % "0.2.1"
 ```
 
 Via [a more civilized method](https://github.com/softprops/ls#readme) which will do the same without all the manual work.
@@ -102,7 +100,7 @@ new String(base64.Encode("paddington", pad = false)) // cGFkZGluZ3Rvbg
 A dual for each is provided with the `Decode` object.
 
 ```scala
-new String(base64.Decode.urlSafe(base64.Encode.urlSafe("hello world?"))) // hello world?
+new String(base64.Decode.urlSafe(base64.Encode.urlSafe("hello world?")).right.get) // hello world?
 ```
 
 ## Why
