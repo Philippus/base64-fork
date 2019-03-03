@@ -11,9 +11,7 @@ This is a library for base64 encoding and decoding raw data.
 Via the copy and paste method
 
 ```scala
-resolvers += "softprops-maven" at "http://dl.bintray.com/content/softprops/maven"
-
-libraryDependencies += "me.lessis" %% "base64" % "0.2.0"
+libraryDependencies += "nl.gn0s1s" %% "base64" % "0.2.1"
 ```
 
 Via [a more civilized method](https://github.com/softprops/ls#readme) which will do the same without all the manual work.
@@ -36,7 +34,7 @@ trait Input[T] {
 }
 ```
 
-Instances of this typeclass are defined for `java.nio.ByteBuffer`, `String`, `(String, java.nio.charset.Charset)`, and
+Instances of this type class are defined for `java.nio.ByteBuffer`, `String`, `(String, java.nio.charset.Charset)`, and
 `Array[Bytes]`. 
 
 ### Standard Encoding
@@ -51,7 +49,7 @@ This returns a Byte Array. To make this output human readable, you may wish to c
 
 ### URL-Safe Encoding
 
-When working with web applications its a common need to base64 encode information in a urlsafe way. Do do so with this library
+When working with web applications it's a common need to base64 encode information in a urlsafe way. To do so with this library
 just invoke `urlSafe` with input on the `Encode` object
 
 ```scala
@@ -60,7 +58,7 @@ new String(base64.Encode.urlSafe("hello world?")) // aGVsbG8gd29ybGQ_
 
 ### Multiline Encoding
 
-Fixing the width of base64 encoded data is, in some cases, a desireble property. In these cases, set the `multiline` flag to true when encoding.
+Fixing the width of base64 encoded data is, in some cases, a desirable property. In these cases, set the `multiline` flag to true when encoding.
 
 ```scala
 val in = "Base64 is a group of similar binary-to-text encoding schemes that represent binary data in an ASCII string format by translating it into a radix-64 representation. The term Base64 originates from a specific MIME content transfer encoding."
@@ -80,7 +78,7 @@ IGVuY29kaW5nLg==
 
 ### Omitting padding
 
-You can omit padding from the output of encodings by setting `pad` option to false
+You can omit padding from the output of encodings by setting the `pad` option to false
 
 This will have the following effect on the results
 
@@ -102,7 +100,7 @@ new String(base64.Encode("paddington", pad = false)) // cGFkZGluZ3Rvbg
 A dual for each is provided with the `Decode` object.
 
 ```scala
-new String(base64.Decode.urlSafe(base64.Encode.urlSafe("hello world?"))) // hello world?
+new String(base64.Decode.urlSafe(base64.Encode.urlSafe("hello world?")).right.get) // hello world?
 ```
 
 ## Why
@@ -113,11 +111,11 @@ Chances are you probably don't need everything that came with the library you us
 
 This library aims to only do one thing. base64 _. That's it.
 
-A seconday goal was to fully understand [rfc4648](http://www.ietf.org/rfc/rfc4648.txt) from first principals. Implementation is a good learning tool. You should try it.
+A secondary goal was to fully understand [rfc4648](http://www.ietf.org/rfc/rfc4648.txt) from first principals. Implementation is a good learning tool. You should try it.
 
 ## Performance
 
-Performance really depends on your usecase, _no matter library you use_. An attempt was made to compare
+Performance really depends on your use case, _no matter library you use_. An attempt was made to compare
 the encoding and decoding performance with the same input data against apache commons-codec base64 and
 netty 4.0.7.final base64.
 
@@ -145,4 +143,4 @@ taken from
 * [haskell base64](https://github.com/bos/base64-bytestring/tree/master/Data/ByteString)
 * [@tototoshi](https://github.com/tototoshi/scala-base64)
 
-Doug Tangren (softprops) 2013-2014
+Doug Tangren (softprops) 2013-2017
