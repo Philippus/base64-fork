@@ -2,6 +2,7 @@ package base64
 
 import java.nio.ByteBuffer
 import java.nio.charset.Charset
+import java.nio.charset.StandardCharsets.UTF_8
 
 import scala.annotation.implicitNotFound
 
@@ -11,8 +12,6 @@ trait Input[T] {
 }
 
 object Input {
-  private[this] val utf8 = Charset.forName("UTF-8")
-
   implicit val ByteBuffers: Input[ByteBuffer] =
     new Input[ByteBuffer] {
       def apply(in: ByteBuffer): Array[Byte] = in.array
@@ -25,7 +24,7 @@ object Input {
 
   implicit val Utf8Str: Input[String] =
     new Input[String] {
-      def apply(in: String): Array[Byte] = Str(in, utf8)
+      def apply(in: String): Array[Byte] = Str(in, UTF_8)
     }
 
   implicit val Str: Input[(String, Charset)] =
