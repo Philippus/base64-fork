@@ -1,32 +1,23 @@
 # base64
 
-[![Build Status](https://travis-ci.org/softprops/base64.svg)](https://travis-ci.org/softprops/base64)
+[![Build Status](https://travis-ci.org/Philippus/base64.svg)](https://travis-ci.org/Philippus/base64)
 
 > the 64th base of rfc4648
 
 This is a library for base64 encoding and decoding raw data.
 
-## Install
+It was forked from [softprops](https://github.com/softprops/base64) to be able to release a Scala 2.12 version.
+However you probably want to consider using the [java 8](#java-8) native implementation.
 
-Via the copy and paste method
+## Installation
 
-```scala
-libraryDependencies += "nl.gn0s1s" %% "base64" % "0.2.1"
-```
+base64 is published for Scala 2.10, 2.11, 2.12, and 2.13.0-M5. To start using it add the following to your build.sbt:
 
-Via [a more civilized method](https://github.com/softprops/ls#readme) which will do the same without all the manual work.
-
-    > ls-install base64
-            
-_Note_ If you are a [bintray-sbt](https://github.com/softprops/bintray-sbt#readme) user you can optionally specify the resolver as
-                        
-```scala
-resolvers += bintray.Opts.resolver.repo("softprops", "maven")
-```
+    libraryDependencies += "nl.gn0s1s" %% "base64" % "0.2.1"
 
 ## Usage
 
-This library encodes and decodes Byte Arrays but exposes a [typeclass interface](https://github.com/softprops/base64/blob/master/src/main/scala/input.scala#L8-L10) for providing input defined as 
+This library encodes and decodes Byte Arrays but exposes a [typeclass interface](https://github.com/Philippus/base64/blob/master/src/main/scala/input.scala#L9-L11) for providing input defined as 
 
 ```scala
 trait Input[T] {
@@ -49,8 +40,8 @@ This returns a Byte Array. To make this output human readable, you may wish to c
 
 ### URL-Safe Encoding
 
-When working with web applications it's a common need to base64 encode information in a urlsafe way. To do so with this library
-just invoke `urlSafe` with input on the `Encode` object
+When working with web applications it's a common need to base64 encode information in a urlsafe way. To do so with this
+library just invoke `urlSafe` with input on the `Encode` object
 
 ```scala
 new String(base64.Encode.urlSafe("hello world?")) // aGVsbG8gd29ybGQ_
@@ -58,7 +49,8 @@ new String(base64.Encode.urlSafe("hello world?")) // aGVsbG8gd29ybGQ_
 
 ### Multiline Encoding
 
-Fixing the width of base64 encoded data is, in some cases, a desirable property. In these cases, set the `multiline` flag to true when encoding.
+Fixing the width of base64 encoded data is, in some cases, a desirable property. In these cases, set the `multiline`
+flag to true when encoding.
 
 ```scala
 val in = "Base64 is a group of similar binary-to-text encoding schemes that represent binary data in an ASCII string format by translating it into a radix-64 representation. The term Base64 originates from a specific MIME content transfer encoding."
@@ -111,16 +103,26 @@ Chances are you probably don't need everything that came with the library you us
 
 This library aims to only do one thing. base64 _. That's it.
 
-A secondary goal was to fully understand [rfc4648](http://www.ietf.org/rfc/rfc4648.txt) from first principals. Implementation is a good learning tool. You should try it.
+A secondary goal was to fully understand [rfc4648](http://www.ietf.org/rfc/rfc4648.txt) from first principals.
+Implementation is a good learning tool. You should try it.
+
+### Java 8
+
+Java 8 has a supported API in `java.util.Base64` which includes all the [features](https://github.com/Philippus/base64/blob/master/src/test/scala/base64/Java89Base64Spec.scala)
+this library provides and is quite [fast](https://github.com/Philippus/base64/blob/master/src/test/scala/base64/Base64Benchmark.scala#L42-L56).
+
+For fun the two encoders available in Java 6 and 7 (`sun.misc.BASE64Decoder` and `javax.xml.bind.DatatypeConverter`) are
+also included in the measurements.
 
 ## Performance
 
-Performance really depends on your use case, _no matter library you use_. An attempt was made to compare
+Performance really depends on your use case, _no matter which library you use_. An attempt was made to compare
 the encoding and decoding performance with the same input data against apache commons-codec base64 and
 netty 4.0.7.final base64.
 
 For encoding and decoding I found the following general repeating performance patterns
-when testing [15,000 runs](https://github.com/softprops/base64/blob/master/src/test/scala/base64/bench.scala#L53) for each library for each operation.
+when testing [15,000 runs](https://github.com/softprops/base64/blob/master/src/test/scala/base64/bench.scala#L53) for
+each library for each operation.
 
 ```
 enc apache commons (byte arrays) took 97 ms
