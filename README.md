@@ -111,8 +111,8 @@ Implementation is a good learning tool. You should try it.
 Java 8 has a supported API in `java.util.Base64` which includes all the [features](https://github.com/Philippus/base64/blob/master/src/test/scala/base64/Java89Base64Spec.scala)
 this library provides and is quite [fast](https://github.com/Philippus/base64/blob/master/src/test/scala/base64/Base64Benchmark.scala#L42-L56).
 
-(For fun the two encoders available in Java 6 and 7 (`sun.misc.BASE64Decoder` and `javax.xml.bind.DatatypeConverter`) are
-also included in the measurements.)
+(For fun the two encoders available in Java 6 and 7 (`sun.misc.BASE64Decoder` and `javax.xml.bind.DatatypeConverter`)
+are also added to the benchmark.)
 
 ## Performance
 
