@@ -10,55 +10,34 @@ import io.netty.handler.codec.base64.{ Base64 => NettyBase64 }
 import org.apache.commons.codec.binary.Base64
 
 class Base64Benchmark extends SimpleBenchmark {
-  def timeApacheEnc(n: Int) = for (i <- 0 to n) {
-    Base64.encodeBase64(Bench.bytes)
-  }
-
-  def timeApacheDec(n: Int) = for (i <- 0 to n) {
-    Base64.decodeBase64(Bench.encoded)
-  }
-
-  def timeNettyEnc(n: Int) = for (i <- 0 to n) {
-    NettyBase64.encode(Unpooled.copiedBuffer(Bench.bytes))
-  }
-
-  def timeNettyDec(n: Int) = for (i <- 0 to n) {
-    NettyBase64.decode(Unpooled.copiedBuffer(Bench.encoded))
-  }
-
-  def timeJava67Enc(n: Int) = for (i <- 0 to n) {
-    DatatypeConverter.printBase64Binary(Bench.bytes)
-  }
-
-  def timeJava67Dec(n: Int) = for (i <- 0 to n) {
-    DatatypeConverter.parseBase64Binary(Bench.encoded.toString)
-  }
-
-  def timeJava89Enc(n: Int) = for (i <- 0 to n) {
-    Java89Base64.getEncoder.encode(Bench.bytes)
-  }
-
-  def timeJava89Dec(n: Int) = for (i <- 0 to n) {
-    Java89Base64.getDecoder.decode(Bench.encoded)
-  }
-
   val sunEncoder = new misc.BASE64Encoder()
-  def timeSunEnc(n: Int) = for (i <- 0 to n) {
-    sunEncoder.encode(Bench.bytes)
-  }
-
   val sunDecoder = new misc.BASE64Decoder()
-  def timeSunDec(n: Int) = for (i <- 0 to n) {
-    sunDecoder.decodeBuffer(Bench.encoded.toString)
-  }
 
-  def timeOurEnc(n: Int) = for (i <- 0 to n) {
-    Encode(Bench.bytes)
-  }
+  def repeat(times: Int)(f: => Unit): Unit = for (_ <- 0 to times) f
 
-  def timeOurDecode(n: Int) = for (i <- 0 to n) {
-    Decode(Bench.encoded)
-  }
+  def timeApacheEnc(n: Int): Unit = repeat(n)(Base64.encodeBase64(Bench.bytes))
+
+  def timeApacheDec(n: Int): Unit = repeat(n)(Base64.decodeBase64(Bench.encoded))
+
+  def timeNettyEnc(n: Int): Unit = repeat(n)(NettyBase64.encode(Unpooled.copiedBuffer(Bench.bytes)))
+
+  def timeNettyDec(n: Int): Unit = repeat(n)(NettyBase64.decode(Unpooled.copiedBuffer(Bench.encoded)))
+
+  def timeJava67Enc(n: Int): Unit = repeat(n)(DatatypeConverter.printBase64Binary(Bench.bytes))
+
+  def timeJava67Dec(n: Int): Unit = repeat(n)(DatatypeConverter.parseBase64Binary(Bench.encoded.toString))
+
+  def timeJava89Enc(n: Int): Unit = repeat(n)(Java89Base64.getEncoder.encode(Bench.bytes))
+
+  def timeJava89Dec(n: Int): Unit = repeat(n)(Java89Base64.getDecoder.decode(Bench.encoded))
+
+  def timeSunEnc(n: Int): Unit = repeat(n)(sunEncoder.encode(Bench.bytes))
+
+  def timeSunDec(n: Int): Unit = repeat(n)(sunDecoder.decodeBuffer(Bench.encoded.toString))
+
+  def timeOurEnc(n: Int): Unit = repeat(n)(Encode(Bench.bytes))
+
+  def timeOurDecode(n: Int): Unit = repeat(n)(Decode(Bench.encoded))
 
   /*
     [info] benchmark     ns linear runtime

@@ -1,7 +1,7 @@
 package base64
 
 trait Alphabet {
-  protected val Base =
+  protected val Base: IndexedSeq[Byte] =
     (('A' to 'Z') ++ ('a' to 'z') ++ ('0' to '9')).map(_.toByte)
   def values: IndexedSeq[Byte]
   def reversed: Array[Byte]
@@ -11,7 +11,7 @@ trait Alphabet {
  *  <http://tools.ietf.org/html/rfc4648#section-4>
  */
 object StdAlphabet extends Alphabet {
-  val values = Base ++ Vector('+', '/').map(_.toByte)
+  val values: IndexedSeq[Byte] = Base ++ Vector('+', '/').map(_.toByte)
   val reversed: Array[Byte] = Array(
     -9,-9,-9,-9,-9,-9,-9,-9,-9,                 // Decimal  0 -  8
     -5,-5,                                      // Whitespace: Tab and Linefeed

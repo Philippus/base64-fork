@@ -1,18 +1,15 @@
 package base64
 
-import java.util.Arrays
-
 object Decode {
-
   val Empty = Array.empty[Byte]
 
   sealed trait Failure
   case class InvalidByte(index: Int, dec: Int) extends Failure
 
-  def urlSafe[T : Input](in: T) =
+  def urlSafe[T : Input](in: T): Either[Failure, Array[Byte]] =
     decodeWith(URLSafeAlphabet)(in)
 
-  def apply[T : Input](in: T) =
+  def apply[T : Input](in: T): Either[Failure, Array[Byte]] =
     decodeWith(StdAlphabet)(in)
 
   def decodeWith[T : Input](
@@ -61,10 +58,9 @@ object Decode {
         } else read(nextByte, b4Posn, outOffset)
       } else Left(InvalidByte(at, index(at) & 0xFF))
     }
-    if (len < 4) Right(Empty) else read().right.map {
-      case len =>
-        if (len == 1 && out(0) == -1) /*all padding*/ Empty
-        else Arrays.copyOf(out, len)
+    if (len < 4) Right(Empty) else read().right.map { len =>
+      if (len == 1 && out(0) == -1) /*all padding*/ Empty
+      else java.util.Arrays.copyOf(out, len)
     }
   }
 
@@ -91,10 +87,10 @@ object Decode {
       val outBuff = ((index(in(inOffset)) & 0xFF)     << 18) |
                     ((index(in(inOffset + 1)) & 0xFF) << 12) |
                     ((index(in(inOffset + 2)) & 0xFF) << 6)  |
-                    ((index(in(inOffset + 3)) & 0xFF))
+                    (index(in(inOffset + 3)) & 0xFF)
       out.update(outOffset, (outBuff >> 16).toByte)
       out.update(outOffset + 1, (outBuff >> 8).toByte)
-      out.update(outOffset + 2, (outBuff).toByte)
+      out.update(outOffset + 2, outBuff.toByte)
       3
     }
 }

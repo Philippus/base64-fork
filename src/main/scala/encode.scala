@@ -1,18 +1,17 @@
 package base64
 
-import java.util.Arrays
+import scala.annotation.{switch, tailrec}
 
 /** Base64 encodings. This implementation does not support line breaks */
 object Encode {
-
   /** Encodes an array of bytes into a base64 encoded string
    *  which accounts for url encoding provisions */
-  def urlSafe[T : Input](in: T, multiline: Boolean = false, pad: Boolean = true) =
+  def urlSafe[T : Input](in: T, multiline: Boolean = false, pad: Boolean = true): Array[Byte] =
     encodeWith(URLSafeAlphabet)(in, multiline, pad)
 
  /** Encodes an array of bytes into a base64 encoded string
    *   <http://www.apps.ietf.org/rfc/rfc4648.html> */
-  def apply[T : Input](in: T, multiline: Boolean = false, pad: Boolean = true) =
+  def apply[T : Input](in: T, multiline: Boolean = false, pad: Boolean = true): Array[Byte] =
     encodeWith(StdAlphabet)(in, multiline, pad)
 
   def encodeWith[T : Input](
@@ -20,14 +19,14 @@ object Encode {
    (ins: T, multiline: Boolean = false, pad: Boolean = true): Array[Byte] = {
     val in = Input(ins)
     val index = alphabet.values
-    val len = in.size
+    val len = in.length
     val len2 = len - 2
     val estimate = (len / 3) * 4 + (if (len % 3 > 0) 4 else 0) match {
       case est => if (multiline) est + (est / MaxLine) else est
     }
     val out = new Array[Byte](estimate)
 
-    @annotation.tailrec
+    @tailrec
     def write(d: Int = 0, e: Int = 0, col: Int = 0): (Int, Int) =
       if (d >= len2) (d, e)
       else {
@@ -44,7 +43,7 @@ object Encode {
         val updated = enc3to4(in, d, len - d, out, e, index, pad)
         e + updated
       } else e
-    if (fe < out.size - 1) Arrays.copyOf(out, fe) else out
+    if (fe < out.length - 1) java.util.Arrays.copyOf(out, fe) else out
   }
 
   private def enc3to4(
@@ -70,7 +69,7 @@ object Encode {
     val inBuff = (if (numSigBytes > 0) (in(inOffset)     << 24) >>> 8 else 0)  |
                  (if (numSigBytes > 1) (in(inOffset + 1) << 24) >>> 16 else 0) |
                  (if (numSigBytes > 2) (in(inOffset + 2) << 24) >>> 24 else 0)
-    (numSigBytes: @annotation.switch) match {
+    (numSigBytes: @switch) match {
       case 3 =>
         out.update(outOffset,     index(inBuff >>> 18))
         out.update(outOffset + 1, index(inBuff >>> 12 & EncMask))
@@ -84,7 +83,8 @@ object Encode {
         if (pad) {
           out.update(outOffset + 3, Pad)
           4
-        } else 3
+        } else
+          3
       case 1 =>
         out.update(outOffset,     index(inBuff >>> 18))
         out.update(outOffset + 1, index(inBuff >>> 12 & EncMask))
@@ -92,7 +92,8 @@ object Encode {
           out.update(outOffset + 2, Pad)
           out.update(outOffset + 3, Pad)
           4
-        } else 2
+        } else
+          2
       case _ =>
         0
     }
