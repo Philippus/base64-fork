@@ -7,7 +7,7 @@
 This is a library for base64 encoding and decoding raw data.
 
 It was forked from [softprops](https://github.com/softprops/base64) to be able to release a Scala 2.12 version.
-However you probably want to consider using the [java 8](#java-8) native implementation.
+However you probably want to consider using the [Java 8](#java-8) native implementation.
 
 ## Installation
 
