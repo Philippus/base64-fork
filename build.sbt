@@ -1,5 +1,9 @@
 organization := "nl.gn0s1s"
 
+javaOptions in Test += "-Dio.netty.leakDetectionLevel=advanced"
+
+fork in Test := true
+
 name := "base64"
 
 version := "0.2.1"
@@ -31,7 +35,7 @@ externalResolvers in LsKeys.lsync := (resolvers in bintray).value
 
 cappiSettings
 
-pomExtra  := (
+pomExtra  :=
   <scm>
     <url>git@github.com:softprops/{name.value}.git</url>
     <connection>scm:git:git@github.com:softprops/{name.value}.git</connection>
@@ -42,4 +46,4 @@ pomExtra  := (
       <name>Doug Tangren</name>
       <url>https://github.com/softprops</url>
     </developer>
-  </developers>)
+  </developers>
