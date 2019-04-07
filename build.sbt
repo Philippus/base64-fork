@@ -15,12 +15,12 @@ homepage := Some(url(s"https://github.com/softprops/${name.value}/#readme"))
 
 scalacOptions += Opts.compile.deprecation
 
-crossScalaVersions := Seq("2.10.7", "2.11.12", "2.13.0-M5", "2.12.8")
+crossScalaVersions := Seq("2.10.7", "2.11.12", "2.13.0-RC1", "2.12.8")
 
 scalaVersion := crossScalaVersions.value.last
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.0.6" % Test,
+  "org.scalatest" %% "scalatest" % "3.0.8-RC2" % Test,
   "commons-codec" % "commons-codec" % "1.12" % Test,
   "io.netty" % "netty-codec" % "4.1.33.Final" % Test)
 
