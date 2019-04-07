@@ -9,12 +9,4 @@ scala:
   - 2.12.8
   - 2.13.0-RC1
 jdk:
-  - openjdk7
   - oraclejdk8
-  - openjdk11
-matrix:
- exclude:
-  - scala: 2.12.8
-    jdk: openjdk7
-  - scala: 2.13.0-RC1
-    jdk: openjdk7
