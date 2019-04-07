@@ -37,8 +37,8 @@ cappiSettings
 
 pomExtra  :=
   <scm>
-    <url>git@github.com:softprops/{name.value}.git</url>
-    <connection>scm:git:git@github.com:softprops/{name.value}.git</connection>
+    <url>git@github.com:Philippus/{name.value}.git</url>
+    <connection>scm:git:git@github.com:Philippus/{name.value}.git</connection>
   </scm>
   <developers>
     <developer>
