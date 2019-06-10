@@ -6,7 +6,7 @@ fork in Test := true
 
 name := "base64"
 
-version := "0.2.1"
+version := "0.2.2"
 
 licenses := Seq(
   ("MIT", url(s"https://github.com/softprops/${name.value}/blob/${version.value}/LICENSE")))

@@ -13,7 +13,7 @@ However you probably want to consider using the [Java 8](#java-8) native impleme
 
 base64 is published for Scala 2.10, 2.11, 2.12, and 2.13. To start using it add the following to your build.sbt:
 
-    libraryDependencies += "nl.gn0s1s" %% "base64" % "0.2.1"
+    libraryDependencies += "nl.gn0s1s" %% "base64" % "0.2.2"
 
 ## Usage
 
