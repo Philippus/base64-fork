@@ -1,0 +1,25 @@
+name: Scala CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        scala-version: ["2.10.7", "2.11.12", "2.13.3", "2.12.11"]
+        java-version: [8]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java-version }}
+      - name: Run tests
+        run: sbt ++${{ matrix.scala-version }} clean test
