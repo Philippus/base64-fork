@@ -1,6 +1,6 @@
 # base64
 
-![Build Status](https://github.com/Philippus/base64/workflows/Scala%20CI/badge.svg)
+![build](https://github.com/Philippus/base64/workflows/build/badge.svg)
 
 > the 64th base of rfc4648
 
