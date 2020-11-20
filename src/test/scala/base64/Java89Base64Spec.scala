@@ -19,7 +19,7 @@ class Java89Base64Spec extends AnyFunSpec {
 
     it("should encode with and without padding") {
       val str = "easure."
-      def check(pad: Boolean, expect: Array[Byte]) {
+      def check(pad: Boolean, expect: Array[Byte]): Unit = {
         val enc = {
           if (pad)
             Base64.getEncoder.encode(str.getBytes)
