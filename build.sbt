@@ -15,14 +15,14 @@ homepage := Some(url(s"https://github.com/softprops/${name.value}/#readme"))
 
 scalacOptions += Opts.compile.deprecation
 
-crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.16", "2.13.10")
+crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.17", "2.13.10")
 
 scalaVersion := crossScalaVersions.value.last
 
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest-funspec" % "3.2.13" % Test,
   "commons-codec" % "commons-codec" % "1.15" % Test,
-  "io.netty" % "netty-codec" % "4.1.79.Final" % Test)
+  "io.netty" % "netty-codec" % "4.1.86.Final" % Test)
 
 bintrayOrganization := Some("gn0s1s")
 bintrayRepository := "releases"
