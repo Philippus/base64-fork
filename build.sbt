@@ -15,7 +15,7 @@ homepage := Some(url(s"https://github.com/softprops/${name.value}/#readme"))
 
 scalacOptions += Opts.compile.deprecation
 
-crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.17", "2.13.11")
+crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.18", "2.13.11")
 
 scalaVersion := crossScalaVersions.value.last
 
