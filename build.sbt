@@ -20,7 +20,7 @@ crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.19", "2.13.14")
 scalaVersion := crossScalaVersions.value.last
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest-funspec" % "3.2.18" % Test,
+  "org.scalatest" %% "scalatest-funspec" % "3.2.19" % Test,
   "commons-codec" % "commons-codec" % "1.17.0" % Test,
   "io.netty" % "netty-codec" % "4.1.111.Final" % Test)
 
