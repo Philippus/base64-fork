@@ -22,7 +22,7 @@ scalaVersion := crossScalaVersions.value.last
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest-funspec" % "3.2.19" % Test,
   "commons-codec" % "commons-codec" % "1.19.0" % Test,
-  "io.netty" % "netty-codec" % "4.2.3.Final" % Test)
+  "io.netty" % "netty-codec" % "4.2.4.Final" % Test)
 
 bintrayOrganization := Some("gn0s1s")
 bintrayRepository := "releases"
